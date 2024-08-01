@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  investimento.api:
+    image: ${DOCKER_REGISTRY-}investimentoapi
+    build:
+      context: .
+      dockerfile: 0-Service/Investimento.API/Dockerfile
+    ports:
+        - "8080:8080"
+  investimento.database:
+     image: postgres:latest
+     container_name: investimento.database
+     environment: 
+        - POSTGRES_DB=investimento
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=310510
+     ports:
+       - "5432:5432"
+     volumes:
+       - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data: 
